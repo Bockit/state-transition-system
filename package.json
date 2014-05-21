@@ -1,0 +1,24 @@
+{
+  "name": "ifsm",
+  "version": "0.0.0",
+  "description": "An infinite state machine.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Bockit/ifsm.git"
+  },
+  "keywords": [
+    "state",
+    "machine",
+    "state-machine",
+    "statemachine"
+  ],
+  "author": "James Hiscock",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/bockit/ifsm/issues"
+  }
+}
