@@ -1,18 +1,18 @@
 var Events = require('events').EventEmitter
 var inherits = require('inherits')
 
-module.exports = Ifsm
+module.exports = StateMachine
 
-inherits(Ifsm, Events)
-function Ifsm(transitions, initialState) {
+inherits(StateMachine, Events)
+function StateMachine(initialState) {
     Events.call(this)
     this.state = initialState || 'null'
-    this.transitions = transitions || {}
 }
 
-Ifsm.prototype = {
+StateMachine.prototype = {
     state: 'null'
-  , transitions: {}
+  , transitions: []
+  , addTransition: addTransition
   , become: become
   , release: release
 }
@@ -25,27 +25,33 @@ function become(state) {
     }
     this.state = state
     this.emit.apply(this, makeArgs('changestate', args))
+    this.emit.apply(this, makeArgs('changestate:' + state,
+        [].slice.call(arguments)))
     return this
 }
 
-function releease() {
+function release() {
     this.removeAllListeners()
 }
 
+function addTransition(from, to, fns) {
+    this.transitions.push({
+        from: from
+      , to: to
+      , fns: fns
+    })
+}
+
 function calcTransition(transitions, from, to) {
-    if (transitions[from + ' ' + to]) {
-        return transitions[from + ' ' + to]
-    }
+    var fns = []
+    for(var i = 0; i < transitions.length; i++) {
+        if (checkRule(transitions[i].from, from) &&
+            checkRule(transitions[i].to, to)) {
 
-    for (rule in transitions) {
-        var split = rule.split(' ')
-
-        if (checkRule(split[0], from) && checkRule(split[1], to)) {
-            return transitions[rule]
+            fns.concat(transitions[i].fns)
         }
     }
-
-    return function() {}
+    return fns
 }
 
 function checkRule(rule, state) {

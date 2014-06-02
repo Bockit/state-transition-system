@@ -1,5 +1,5 @@
 {
-  "name": "ifsm",
+  "name": "state-transition-system",
   "version": "0.0.0",
   "description": "An infinite state machine.",
   "main": "index.js",
@@ -13,8 +13,8 @@
   "keywords": [
     "state",
     "machine",
-    "state-machine",
-    "statemachine"
+    "transition",
+    "system"
   ],
   "author": "James Hiscock",
   "license": "BSD-3-Clause",
