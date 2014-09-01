@@ -6,11 +6,11 @@ var extend = require('extend')
 function StateMachine(initialState) {
     Events.call(this)
     this.state = initialState || 'null'
+    this.transitions = []
 }
 
 StateMachine.prototype = extend({}, Events.prototype, {
     state: 'null'
-  , transitions: []
   , addTransition: addTransition
   , become: become
   , release: release
@@ -34,11 +34,22 @@ function release() {
 }
 
 function addTransition(from, to, fn) {
-    this.transitions.push({
-        from: from
-      , to: to
-      , fn: fn
-    })
+    if (arguments.length > 3) {
+        for (var i = 2; i < arguments.length; i++) {
+            this.addTransition(from, to, arguments[i])
+        }
+
+        return this
+    }
+    else {
+        this.transitions.push({
+            from: from
+          , to: to
+          , fn: fn
+        })
+
+        return this
+    }
 }
 
 function calcTransitions(transitions, from, to) {
