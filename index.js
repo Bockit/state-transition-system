@@ -1,21 +1,20 @@
-var Events = require('events').EventEmitter
-var inherits = require('inherits')
-
 module.exports = StateMachine
 
-inherits(StateMachine, Events)
+var Events = require('events').EventEmitter
+var extend = require('extend')
+
 function StateMachine(initialState) {
     Events.call(this)
     this.state = initialState || 'null'
 }
 
-StateMachine.prototype = {
+StateMachine.prototype = extend({}, Events.prototype, {
     state: 'null'
   , transitions: []
   , addTransition: addTransition
   , become: become
   , release: release
-}
+})
 
 function become(state) {
     var transitions = calcTransitions(this.transitions, this.state, state)
@@ -34,21 +33,21 @@ function release() {
     this.removeAllListeners()
 }
 
-function addTransition(from, to, fns) {
+function addTransition(from, to, fn) {
     this.transitions.push({
         from: from
       , to: to
-      , fns: fns
+      , fn: fn
     })
 }
 
-function calcTransition(transitions, from, to) {
+function calcTransitions(transitions, from, to) {
     var fns = []
     for(var i = 0; i < transitions.length; i++) {
         if (checkRule(transitions[i].from, from) &&
             checkRule(transitions[i].to, to)) {
 
-            fns.concat(transitions[i].fns)
+            fns.push(transitions[i].fn)
         }
     }
     return fns
@@ -82,8 +81,8 @@ function checkRule(rule, state) {
 function makeArgs() {
     var args = []
     for (var i = 0; i < arguments.length; i++) {
-        if (Array.isArray(arguments[i]) {
-            for (var j = 0; j < arguments[i].length; i++) {
+        if (Array.isArray(arguments[i])) {
+            for (var j = 0; j < arguments[i].length; j++) {
                 args.push(arguments[i][j])
             }
         }
