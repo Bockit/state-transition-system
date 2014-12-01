@@ -33,23 +33,15 @@ function release() {
     this.removeAllListeners()
 }
 
-function addTransition(from, to, fn) {
-    if (arguments.length > 3) {
-        for (var i = 2; i < arguments.length; i++) {
-            this.addTransition(from, to, arguments[i])
-        }
-
-        return this
-    }
-    else {
+function addTransition(from, to) {
+    for (var i = 2; i < arguments.length; i++) {
         this.transitions.push({
             from: from
           , to: to
-          , fn: fn
+          , fn: arguments[i]
         })
-
-        return this
     }
+    return this
 }
 
 function calcTransitions(transitions, from, to) {

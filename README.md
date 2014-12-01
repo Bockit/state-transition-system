@@ -26,6 +26,22 @@ Finally, change the state of the machine with `sm.changeState()`
 sm.changeState('wee') // ... executes.
 ```
 
+You can add multiple transitions in 1 call
+
+```javascript
+sm.addTransition('woo', 'waa', function(){...}, function(){...})
+``
+
+You can add multiple transitions in multiple calls
+
+```javascript
+sm.addTransition('woo', 'waa', function(){...})
+sm.addTransition('woo', 'waa', function(){...})
+sm.addTransition('woo', 'waa', function(){...})
+```
+
+It will find all functions that match a state change and execute them first-in first-out.
+
 
 State Rules
 -----------
