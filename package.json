@@ -1,6 +1,6 @@
 {
   "name": "state-transition-system",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "An infinite state machine.",
   "main": "index.js",
   "scripts": {
