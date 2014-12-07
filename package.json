@@ -29,7 +29,8 @@
     "browserify": "^6.3.3",
     "faucet": "0.0.1",
     "tape": "^3.0.3",
-    "testling": "^1.7.1"
+    "testling": "^1.7.1",
+    "zuul": "^1.15.1"
   },
   "testling": {
     "files": "test/index.js",

@@ -18,7 +18,7 @@ StateMachine.prototype = extend({}, Events.prototype, {
 
 function become(state) {
     var transitions = calcTransitions(this.transitions, this.state, state)
-    var args = makeArgs(this.state, state, [].slice.call(arguments))
+    var args = makeArgs(this.state, state, [].slice.call(arguments, 1))
     for (var i = 0; i < transitions.length; i++) {
         transitions[i].apply(null, args)
     }
@@ -74,7 +74,7 @@ function checkRule(rule, state) {
     // Starts with wildcard
     if (rule[0] === '*') {
         var excludes = rule.split('!').slice(1)
-        return !!(excludes.indexOf(state) + 1)
+        return !(excludes.indexOf(state) + 1)
     }
 
     // No match
