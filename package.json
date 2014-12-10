@@ -23,7 +23,7 @@
     "url": "https://github.com/bockit/state-transition-system/issues"
   },
   "dependencies": {
-    "extend": "~1.2.1"
+    "extend": "^2.0.0"
   },
   "devDependencies": {
     "browserify": "^6.3.3",
