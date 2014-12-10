@@ -3,7 +3,7 @@ State Transition System
 
 ![Build status](https://api.travis-ci.org/Bockit/state-transition-system.svg?branch=master)
 
-Use this module to create [infinite-state-machines][ifsm_wiki]. A State Machine defines transition rules, which comprise a from state, a to state, and n array of functions to call when the machine transitions between those states. For example, you could have a rule, from `'loading'` to `'idle'` you call `render()`.
+Use this module to create [infinite-state-machines](http://en.wikipedia.org/wiki/State_transition_system). A State Machine defines transition rules, which comprise a from state, a to state, and n array of functions to call when the machine transitions between those states. For example, you could have a rule, from `'loading'` to `'idle'` you call `render()`.
 
 
 Usage
@@ -100,5 +100,3 @@ Adds a transition to a state machine. When the state machine transitions from `f
 #### `sm.changeState(state)` ####
 
 Changes the state machines state to `state`. Any transitions that have been registered that match the transition will be called.
-
-[ifsm_wiki]: http://en.wikipedia.org/wiki/State_transition_system
