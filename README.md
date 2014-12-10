@@ -32,7 +32,7 @@ You can add multiple transitions in 1 call
 
 ```javascript
 sm.addTransition('woo', 'waa', function(){...}, function(){...})
-``
+```
 
 You can add multiple transitions in multiple calls
 
