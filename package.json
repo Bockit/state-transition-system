@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "zuul -- tests/index.js",
-    "test-local": "tape tests/index.js | faucet",
-    "test-testling": "browserify tests/index.js | testling | faucet"
+    "test-local": "tape tests/index.js | faucet"
   },
   "repository": {
     "type": "git",
@@ -30,19 +29,7 @@
     "browserify": "^6.3.3",
     "faucet": "0.0.1",
     "tape": "^3.0.3",
-    "testling": "^1.7.1",
     "zuul": "^1.15.1",
     "zuulnice": "^1.0.0"
-  },
-  "testling": {
-    "files": "test/index.js",
-    "browsers": [
-      "ie/9..latest",
-      "chrome/latest",
-      "ff/latest",
-      "safari/7..latest",
-      "opera/latest",
-      "iphone/7..latest"
-    ]
   }
 }
