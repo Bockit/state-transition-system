@@ -30,7 +30,8 @@
     "faucet": "0.0.1",
     "tape": "^3.0.3",
     "testling": "^1.7.1",
-    "zuul": "^1.15.1"
+    "zuul": "^1.15.1",
+    "zuulnice": "^1.0.0"
   },
   "testling": {
     "files": "test/index.js",
