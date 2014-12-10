@@ -4,8 +4,9 @@
   "description": "An infinite state machine.",
   "main": "index.js",
   "scripts": {
-    "test": "tape tests/index.js | faucet",
-    "test-browser": "browserify tests/index.js | testling | faucet"
+    "test": "zuul -- tests/index.js",
+    "test-local": "tape tests/index.js | faucet",
+    "test-testling": "browserify tests/index.js | testling | faucet"
   },
   "repository": {
     "type": "git",
