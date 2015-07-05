@@ -12,6 +12,7 @@ function StateMachine(initialState) {
 StateMachine.prototype = extend({}, Events.prototype, {
     state: 'null'
   , addTransition: addTransition
+  // become is kept for backwards compatibility
   , become: changeState
   , changeState: changeState
   , release: release
