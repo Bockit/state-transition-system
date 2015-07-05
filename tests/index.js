@@ -25,9 +25,9 @@ test('Simple transitions', function(t) {
             t.pass('Secondary transition')
         })
 
-    stateMachine.become('a')
+    stateMachine.changeState('a')
     t.equal(stateMachine.state, 'a', 'State changed')
-    stateMachine.become('b')
+    stateMachine.changeState('b')
 
     t.end()
 })
@@ -45,7 +45,7 @@ test('Callback arguments', function(t) {
         t.equal(param1, param, 'Parameters are kept referentially the same')
     })
 
-    stateMachine.become('a', param)
+    stateMachine.changeState('a', param)
     t.end()
 
 })
@@ -62,7 +62,7 @@ test('Multiple callbacks', function(t) {
         .addTransition('null', 'a', function() {
             t.pass('Callback from second addTransition call')
         })
-        .become('a')
+        .changeState('a')
 
     t.end()
 })
@@ -81,6 +81,6 @@ test('Wildcards', function(t) {
             t.pass('Wildcard negation should not block')
         })
 
-    stateMachine.become('a')
+    stateMachine.changeState('a')
     t.end()
 })

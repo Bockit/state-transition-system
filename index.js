@@ -12,11 +12,12 @@ function StateMachine(initialState) {
 StateMachine.prototype = extend({}, Events.prototype, {
     state: 'null'
   , addTransition: addTransition
-  , become: become
+  , become: changeState
+  , changeState: changeState
   , release: release
 })
 
-function become(state) {
+function changeState(state) {
     var transitions = calcTransitions(this.transitions, this.state, state)
     var args = makeArgs(this.state, state, [].slice.call(arguments, 1))
     for (var i = 0; i < transitions.length; i++) {
