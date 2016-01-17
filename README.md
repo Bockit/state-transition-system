@@ -44,6 +44,13 @@ sm.addTransition('woo', 'waa', function(){...})
 
 It will find all functions that match a state change and execute them first-in first-out.
 
+If any matching transition function returns false, the transition will be cancelled and will emit a `transitionblocked` event.
+
+```
+sm.addTransition('woo', 'waa', function() { return false })
+sm.addTransition('woo', 'waa', function() { console.log('never reached') })
+```
+
 
 State Rules
 -----------
@@ -79,10 +86,17 @@ State Machine instances are node EventEmitters. As such they provide the EventEm
 
 Event that fires when state is changed. First argument to any callbacks is the state, subsequent arguments are those passed into the `changeState` call.
 
-
 #### `changestate:<name>` ####
 
 Event that fires when a state is changed. Includes the name of the state in the event name. Arguments match those passed into the `changeState()` call.
+
+#### `transitionblocked` ####
+
+Event that fires when any statechange is blocked. First argument to any callbacks is the state, subsequent arguments are those passed into the `changeState` call. The final argument is a reference to the function which blocked the transition as it is useful for debugging.
+
+#### `transitionblocked:<name>` ####
+
+Event that fires when a named statechange is blocked. Includes the name of the state in the event name. Arguments match those passed into the `changeState()` call. The final argument is a reference to the function which blocked the transition as it is useful for debugging.
 
 API
 ---
@@ -92,7 +106,7 @@ API
 Construct a state machine with an initial state of `initialState`.
 
 
-#### `sm.addTransition(from, to, fn)` ####
+#### `sm.addTransition(from, to, fn[, fn, ...])` ####
 
 Adds a transition to a state machine. When the state machine transitions from `from` to `to` then `fn` will be called. The first two arguments to `fn` will be `from` and `to`, subsequent arguments will match those passed in when `changeState` is called.
 
@@ -100,3 +114,8 @@ Adds a transition to a state machine. When the state machine transitions from `f
 #### `sm.changeState(state)` ####
 
 Changes the state machines state to `state`. Any transitions that have been registered that match the transition will be called.
+
+Changelog
+---------
+
+- **2.0.0**: If any transition functions return false, cancel the transition
