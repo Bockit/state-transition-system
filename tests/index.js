@@ -84,3 +84,27 @@ test('Wildcards', function(t) {
     stateMachine.changeState('a')
     t.end()
 })
+
+test('Cancelled transitions', function(t) {
+    t.plan(4)
+
+    var stateMachine = new StateTransitionSystem('a')
+    stateMachine.addTransition('a', 'b', cancel, function() {
+        t.fail('Previous transition should cancel this one')
+    })
+
+    stateMachine.on('transitionblocked', function(current, attempted, fn) {
+        t.pass('Transition blocked')
+        t.equal('a', current)
+        t.equal('b', attempted)
+        t.equal(fn, cancel)
+    })
+
+    stateMachine.changeState('b')
+
+    t.end()
+
+    function cancel () {
+        return false
+    }
+})
