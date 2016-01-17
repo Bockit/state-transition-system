@@ -21,8 +21,16 @@ StateMachine.prototype = extend({}, Events.prototype, {
 function changeState(state) {
     var transitions = calcTransitions(this.transitions, this.state, state)
     var args = makeArgs(this.state, state, [].slice.call(arguments, 1))
+
     for (var i = 0; i < transitions.length; i++) {
-        transitions[i].apply(null, args)
+        var result = transitions[i].apply(null, args)
+        if (result === false) {
+            this.emit.apply(this, makeArgs('transitionblocked', args,
+                transitions[i]))
+            this.emit.apply(this, makeArgs('transitionblocked:' + state, args,
+                transitions[i]))
+            return this;
+        }
     }
     this.state = state
     this.emit.apply(this, makeArgs('changestate', args))
